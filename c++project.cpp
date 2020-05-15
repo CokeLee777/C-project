@@ -29,11 +29,6 @@ public:
 
 	int get_StudentNum() { return Num; } //학번을 얻는 함수
 
-	void Student_Delete()
-	{
-		delete[] Name;
-
-	}
 	void Student_Show()
 	{
 		cout << "이름 : " << Name << endl;
@@ -44,7 +39,7 @@ public:
 		cout << "기말고사 점수 : " << Final_Score << endl;
 		cout << "환산합산 점수 : " << Total_Score << endl;
 	}
-	friend void Student_Search(Student_Profile &Search);
+	
 };
 
 Student_Profile *prfArr[100];		//학생정보 저장을 위한 클래스 객체의 포인터 배열
@@ -82,19 +77,33 @@ void Student_Input()
 //학생 정보를 지우는 함수
 void Student_Delete()
 {
-	
+	int num;
+	cout << "학번을 입력해주세요 : "; cin >> num;
+	for (int i = 0; i < prfNum; i++)
+	{
+		if (prfArr[i]->get_StudentNum() == num)
+		{
+			cout << endl;
+			delete prfArr[i];
+			cout << "삭제 되었습니다." << endl;
+			break;
+		}
+		
+	}
 }
 
 //학생 정보를 탐색하는 함수
-void Student_Search(Student_Profile &Search)
+void Student_Search()
 {
-	char name[NAME_LEN];
-	cout << "학생 이름을 입력해주세요 : "; cin >> name;
+	
+	int num;
+	cout << "학번을 입력해주세요 : "; cin >> num;
 	for (int i = 0; i < prfNum; i++)
 	{
-		if (prfArr[i]-> Name)
+		if (prfArr[i]->get_StudentNum() == num)
 		{
-			prfArr[i]->Student_Show();
+			cout << endl;
+			prfArr[i]->Student_Show();	
 			break;
 		}
 	}
