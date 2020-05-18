@@ -1,158 +1,164 @@
 #include <iostream>
-# include <cstring>
+#include <cstring>
 #define _CRT_SECURE_NO_WARNINGS
 using namespace std;
 
 const int NAME_LEN = 20;
 
-class Student_Profile 
+class Student_Profile
 {
 private:
-	char *Name;				//ÇĞ»ı ÀÌ¸§
-	int Num;						//ÇĞ»ı ÇĞ¹ø
-	double Atd_Score;      //Ãâ¼® Á¡¼ö(30%)
-	double Hwk_Score;		//°úÁ¦ Á¡¼ö(10%)
-	double Middle_Score;	//Áß°£°í»ç Á¡¼ö(30%)
-	double Final_Score;		//±â¸»°í»ç Á¡¼ö(30%)
-	double Total_Score;    //È¯»ê ÇÕ»ê Á¡¼ö(100%)
+    char* Name;            //í•™ìƒ ì´ë¦„
+    int Num;                  //í•™ìƒ í•™ë²ˆ
+    double Atd_Score;      //ì¶œì„ ì ìˆ˜(30%)
+    double Hwk_Score;      //ê³¼ì œ ì ìˆ˜(10%)
+    double Middle_Score;   //ì¤‘ê°„ê³ ì‚¬ ì ìˆ˜(30%)
+    double Final_Score;      //ê¸°ë§ê³ ì‚¬ ì ìˆ˜(30%)
+    double Total_Score;    //í™˜ì‚° í•©ì‚° ì ìˆ˜(100%)
+
 public:
-	Student_Profile(char *name, int num, double atd,  double hwk, double middle, double final , double total)
-		:Num(num),Atd_Score(atd), Hwk_Score(hwk), Middle_Score(middle), Final_Score(final), Total_Score(total)
-	{
-		Name = new char[strlen(name) + 1];
-		strcpy(Name, name);
-	}
-	~Student_Profile() 
-	{
-		delete[] Name;
-	}
+    Student_Profile(char* name, int num, double atd, double hwk, double middle, double final, double total)
+        :Num(num), Atd_Score(atd), Hwk_Score(hwk), Middle_Score(middle), Final_Score(final), Total_Score(total)
+    {
+        Name = new char[strlen(name) + 1];
+        strcpy(Name, name);
+    }
+    ~Student_Profile()
+    {
+        delete[] Name;
+    }
 
-	int get_StudentNum() { return Num; } //ÇĞ¹øÀ» ¾ò´Â ÇÔ¼ö
+    int get_StudentNum() { return Num; } //í•™ë²ˆì„ ì–»ëŠ” í•¨ìˆ˜
 
-	void Student_Show()
-	{
-		cout << "ÀÌ¸§ : " << Name << endl;
-		cout << "ÇĞ¹ø : " << Num << endl;
-		cout << "Ãâ¼® Á¡¼ö : " << Atd_Score << endl;
-		cout << "°úÁ¦ Á¡¼ö : " << Hwk_Score << endl;
-		cout << "Áß°£°í»ç Á¡¼ö : " << Middle_Score << endl;
-		cout << "±â¸»°í»ç Á¡¼ö : " << Final_Score << endl;
-		cout << "È¯»êÇÕ»ê Á¡¼ö : " << Total_Score << endl;
-	}
-	
+    void Student_Show()
+    {
+        cout << "ì´ë¦„ : " << Name << endl;
+        cout << "í•™ë²ˆ : " << Num << endl;
+        cout << "ì¶œì„ ì ìˆ˜ : " << Atd_Score << endl;
+        cout << "ê³¼ì œ ì ìˆ˜ : " << Hwk_Score << endl;
+        cout << "ì¤‘ê°„ê³ ì‚¬ ì ìˆ˜ : " << Middle_Score << endl;
+        cout << "ê¸°ë§ê³ ì‚¬ ì ìˆ˜ : " << Final_Score << endl;
+        cout << "í™˜ì‚°í•©ì‚° ì ìˆ˜ : " << Total_Score << endl;
+    }
+
 };
 
-Student_Profile *prfArr[100];		//ÇĞ»ıÁ¤º¸ ÀúÀåÀ» À§ÇÑ Å¬·¡½º °´Ã¼ÀÇ Æ÷ÀÎÅÍ ¹è¿­
-int prfNum = 0;							//ÀúÀåµÈ ÇĞ»ıÁ¤º¸ ¼ö
+Student_Profile* prfArr[100];      //í•™ìƒì •ë³´ ì €ì¥ì„ ìœ„í•œ í´ë˜ìŠ¤ ê°ì²´ì˜ í¬ì¸í„° ë°°ì—´
+int prfNum = 0;                     //ì €ì¥ëœ í•™ìƒì •ë³´ ìˆ˜
 
-//¸Ş´º ÇÔ¼ö
+//ë©”ë‰´ í•¨ìˆ˜
 void Menu(void)
 {
-	cout << "----------menu----------" << endl;
-	cout << "1. ÇĞ»ı Á¤º¸ µî·Ï" << endl;
-	cout << "2. ÇĞ»ı Á¤º¸ »èÁ¦"<< endl;
-	cout << "3. ÇĞ»ı Á¤º¸ Å½»ö" << endl;
-	cout << "4. ÇĞ»ı Á¤º¸ ÀüÃ¼ Ãâ·Â" << endl;
-	cout << "5. ÇÁ·Î±×·¥ Á¾·á" << endl;
+    cout << "----------menu----------" << endl;
+    cout << "1. í•™ìƒ ì •ë³´ ë“±ë¡" << endl;
+    cout << "2. í•™ìƒ ì •ë³´ ì‚­ì œ" << endl;
+    cout << "3. í•™ìƒ ì •ë³´ íƒìƒ‰" << endl;
+    cout << "4. í•™ìƒ ì •ë³´ ì „ì²´ ì¶œë ¥" << endl;
+    cout << "5. í”„ë¡œê·¸ë¨ ì¢…ë£Œ" << endl;
 }
 
-//ÇĞ»ı Á¤º¸¸¦ ÀÔ·Â ¹Ş´Â ÇÔ¼ö
-void Student_Input() 
+//í•™ìƒ ì •ë³´ë¥¼ ì…ë ¥ ë°›ëŠ” í•¨ìˆ˜
+void Student_Input()
 {
-	char name[NAME_LEN];
-	int num;
-	double atd = 0, hwk = 0, middle = 0, final = 0, total = 0;
-	cout << endl;
-	cout << "==ÇĞ»ı Á¤º¸ ÀÔ·Â==" << endl;
-	cout << "ÀÌ¸§ : "; cin >> name;
-	cout << "ÇĞ¹ø : "; cin >> num;
-	cout << "Ãâ¼® Á¡¼ö : "; cin >> atd;
-	cout << "°úÁ¦ Á¡¼ö : "; cin >> hwk;
-	cout << "Áß°£°í»ç Á¡¼ö : "; cin >> middle;
-	cout << "±â¸»°í»ç Á¡¼ö : "; cin >> final;
-	total = (atd * 30 + hwk * 10 + middle * 30 + final * 30) / 100;
-	prfArr[prfNum++] = new Student_Profile(name, num, atd, hwk, middle, final, total);
+    char name[NAME_LEN];
+    int num;
+    double atd = 0, hwk = 0, middle = 0, final = 0, total = 0;
+    cout << endl;
+    cout << "==í•™ìƒ ì •ë³´ ì…ë ¥==" << endl;
+    cout << "ì´ë¦„ : "; cin >> name;
+    cout << "í•™ë²ˆ : "; cin >> num;
+    cout << "ì¶œì„ ì ìˆ˜ : "; cin >> atd;
+    cout << "ê³¼ì œ ì ìˆ˜ : "; cin >> hwk;
+    cout << "ì¤‘ê°„ê³ ì‚¬ ì ìˆ˜ : "; cin >> middle;
+    cout << "ê¸°ë§ê³ ì‚¬ ì ìˆ˜ : "; cin >> final;
+    total = (atd * 30 + hwk * 10 + middle * 30 + final * 30) / 100;
+    prfArr[prfNum++] = new Student_Profile(name, num, atd, hwk, middle, final, total);
 }
 
-//ÇĞ»ı Á¤º¸¸¦ Áö¿ì´Â ÇÔ¼ö
+//í•™ìƒ ì •ë³´ë¥¼ ì§€ìš°ëŠ” í•¨ìˆ˜
+
 void Student_Delete()
 {
-	int num;
-	cout << "ÇĞ¹øÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä : "; cin >> num;
-	for (int i = 0; i < prfNum; i++)
-	{
-		if (prfArr[i]->get_StudentNum() == num)
-		{
-			cout << endl;
-			delete prfArr[i];
-			cout << "»èÁ¦ µÇ¾ú½À´Ï´Ù." << endl;
-			break;
-		}
-		
-	}
+    int num;
+    cout << "í•™ë²ˆì„ ì…ë ¥í•´ì£¼ì„¸ìš” : "; cin >> num;
+    for (int i = 0; i < prfNum; i++)
+    {
+        if (prfArr[i]->get_StudentNum() == num)
+        {
+            cout << endl;
+            prfArr[i] = NULL;
+            delete prfArr[i];
+            cout << "ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
+            break;
+        }
+
+    }
 }
 
-//ÇĞ»ı Á¤º¸¸¦ Å½»öÇÏ´Â ÇÔ¼ö
+//í•™ìƒ ì •ë³´ë¥¼ íƒìƒ‰í•˜ëŠ” í•¨ìˆ˜
 void Student_Search()
 {
-	
-	int num;
-	cout << "ÇĞ¹øÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä : "; cin >> num;
-	for (int i = 0; i < prfNum; i++)
-	{
-		if (prfArr[i]->get_StudentNum() == num)
-		{
-			cout << endl;
-			prfArr[i]->Student_Show();	
-			break;
-		}
-	}
+
+    int num;
+    cout << "í•™ë²ˆì„ ì…ë ¥í•´ì£¼ì„¸ìš” : "; cin >> num;
+    for (int i = 0; i < prfNum; i++)
+    {
+        if (prfArr[i]->get_StudentNum() == num)
+        {
+            cout << endl;
+            prfArr[i]->Student_Show();
+            break;
+        }
+    }
 }
 
-//ÇĞ»ı Á¤º¸¸¦ ÀüÃ¼ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//í•™ìƒ ì •ë³´ë¥¼ ì „ì²´ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 void Student_AllOutput()
 {
-	cout << "==ÇĞ»ı Á¤º¸ ÀüÃ¼ Ãâ·Â== " << endl;
-	for (int i = 0; i < prfNum; i++) 
-	{
-		prfArr[i]->Student_Show(); 
-		cout << endl;
-	}
+    cout << "==í•™ìƒ ì •ë³´ ì „ì²´ ì¶œë ¥== " << endl;
+    for (int i = 0; i < prfNum; i++)
+    {
+        if (prfArr[i] != NULL)//prfArr í¬ì¸í„° ë°°ì—´ì´ ë¹„ì–´ìˆì§€ ì•Šì„ ê²½ìš° ì¶œë ¥
+        {
+            prfArr[i]->Student_Show();
+            cout << endl;
+        }
+    }
 }
 
-int main(void) 
+int main(void)
 {
-	int choice;
+    int choice;
 
-	while (1)
-	{
-		Menu();
-		cout << "¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ";
-		cin >> choice;
+    while (1)
+    {
+        Menu();
+        cout << "ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ";
+        cin >> choice;
 
-		switch (choice)
-		{
-		case 1:
-			Student_Input();
-			break;
-		case 2:
-			Student_Delete();
-			break;
-		case 3:
-			Student_Search();
-			break;
-		case 4:
-			Student_AllOutput();
-			break;
-		case 5:
-			for (int i = 0; i < prfNum; i++) 
-			{
-				delete prfArr[i]; //ÇÁ·Î±×·¥ Á¾·á Àü¿¡ ÇĞ»ı Á¤º¸ »èÁ¦
-			}
-			return 0;
-		default:
-			cout << "¼ıÀÚ¸¦ Àß¸ø ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù." << endl;
-		}
-	}
-	return 0;
+        switch (choice)
+        {
+        case 1:
+            Student_Input();
+            break;
+        case 2:
+            Student_Delete();
+            break;
+        case 3:
+            Student_Search();
+            break;
+        case 4:
+            Student_AllOutput();
+            break;
+        case 5:
+            for (int i = 0; i < prfNum; i++)
+            {
+                delete prfArr[i]; //í”„ë¡œê·¸ë¨ ì¢…ë£Œ ì „ì— í•™ìƒ ì •ë³´ ì‚­ì œ
+            }
+            return 0;
+        default:
+            cout << "ìˆ«ìë¥¼ ì˜ëª» ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤." << endl;
+        }
+    }
+    return 0;
 }
